@@ -22,12 +22,12 @@ class ProgramaApiController extends AbstractController
         $this->programaFunciones = $programaFunciones;
     }
 
-    #[Route('/agregar/programa', name: 'agregar_programa',methods:['POST'])]
-    public function agregarPrograma(Request $request): JsonResponse
+    #[Route('/agregar/programa/paquete', name: 'agregar_programa_paquete',methods:['POST'])]
+    public function agregarProgramaPaquete(Request $request): JsonResponse
     {
 
         $data = json_decode($request->getContent(), true);
-        $resultado = $this->programaFunciones->guardarPrograma($data, 1);
+        $resultado = $this->programaFunciones->guardarPrograma($data, 2);
         return $this->json($resultado, Response::HTTP_OK);
     }
 

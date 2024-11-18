@@ -43,6 +43,9 @@ class Taller
     #[ORM\OneToMany(targetEntity: ColaboradorTaller::class, mappedBy: 'talleres', orphanRemoval: true)]
     private Collection $colaboradoresTaller;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $t_estado_sys = null;
+
     public function __construct()
     {
         $this->colaboradoresTaller = new ArrayCollection();
@@ -151,6 +154,18 @@ class Taller
                 $colaboradoresTaller->setTalleres(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTEstadoSys(): ?int
+    {
+        return $this->t_estado_sys;
+    }
+
+    public function setTEstadoSys(?int $t_estado_sys): static
+    {
+        $this->t_estado_sys = $t_estado_sys;
 
         return $this;
     }

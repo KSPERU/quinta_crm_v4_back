@@ -43,6 +43,9 @@ class Temporada
     #[ORM\OneToMany(targetEntity: Colectiva::class, mappedBy: 'temporada', orphanRemoval: true)]
     private Collection $colectivas;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $tem_estado_sys = null;
+
     public function __construct()
     {
         $this->colectivas = new ArrayCollection();
@@ -151,6 +154,18 @@ class Temporada
                 $colectiva->setTemporada(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTemEstadoSys(): ?int
+    {
+        return $this->tem_estado_sys;
+    }
+
+    public function setTemEstadoSys(?int $tem_estado_sys): static
+    {
+        $this->tem_estado_sys = $tem_estado_sys;
 
         return $this;
     }

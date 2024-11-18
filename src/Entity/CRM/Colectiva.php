@@ -40,6 +40,9 @@ class Colectiva
     #[ORM\OneToMany(targetEntity: Taller::class, mappedBy: 'colectiva', orphanRemoval: true)]
     private Collection $talleres;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $c_estado_sys = null;
+
     public function __construct()
     {
         $this->talleres = new ArrayCollection();
@@ -136,6 +139,18 @@ class Colectiva
                 $tallere->setColectiva(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCEstadoSys(): ?int
+    {
+        return $this->c_estado_sys;
+    }
+
+    public function setCEstadoSys(?int $c_estado_sys): static
+    {
+        $this->c_estado_sys = $c_estado_sys;
 
         return $this;
     }
