@@ -60,13 +60,12 @@ class TemporadaFunciones
         }catch(\Exception $e){
             echo 'Ocurrió un error al realizar la operacion : '.$e;
         }
-
-       
+    
     }
 
     public function eliminarTemporada(int $id){
         try{
-             if ($this->deshabilitarTemporada($id)){
+            if ($this->deshabilitarTemporada($id)){
             return[
                 'status' => 'success',
                 'datos_temporadas' => $this->obtenerTemporadas(),
@@ -75,7 +74,7 @@ class TemporadaFunciones
         }catch(\Exception $e){
             echo 'Ocurrió un error al realizar la operacion : '.$e;
         }
-       
+    
     }
 
     public function getTemporadas(){

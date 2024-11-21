@@ -7,8 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/api',name: 'api_')]
 class ColaboradorApiController extends AbstractController
 {
     private $colaboradorFunciones;
@@ -18,7 +20,8 @@ class ColaboradorApiController extends AbstractController
         $this->colaboradorFunciones = $colaboradorFunciones;
     }
 
-    #[Route('/api/agregar/colaborador', name: 'api_agregar_colaborador', methods:['POST'])]
+    #[Route('/agregar/colaborador', name: 'agregar_colaborador', methods:['POST'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function agregarColaborador(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -26,7 +29,8 @@ class ColaboradorApiController extends AbstractController
         return $this->json($resultado, Response::HTTP_OK);
     }
 
-    #[Route('/api/actualizar/colaborador', name: 'api_actualizar_colaborador', methods:['POST'])]
+    #[Route('/actualizar/colaborador', name: 'actualizar_colaborador', methods:['POST'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function actualizarColaborador(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -34,14 +38,15 @@ class ColaboradorApiController extends AbstractController
         return $this->json($resultado, Response::HTTP_OK);
     }
 
-    #[Route('/api/eliminar/colaborador/{id}', name: 'api_eliminar_colaborador', methods:['GET'])]
+    #[Route('/eliminar/colaborador/{id}', name: 'eliminar_colaborador', methods:['GET'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function eliminarColaborador(int $id): JsonResponse
     {
         $resultado = $this->colaboradorFunciones->eliminarColaborador($id);
         return $this->json($resultado, Response::HTTP_OK);
     }
 
-    #[Route('/api/obtener/colaborador/{id}', name: 'api_obtener_colaborador', methods:['GET'])]
+    #[Route('/obtener/colaborador/{id}', name: 'obtener_colaborador', methods:['GET'])]
     public function obtenerColaborador(int $id): JsonResponse
     {
         $resultado = $this->colaboradorFunciones->obtenerColaboradorPorId($id);
